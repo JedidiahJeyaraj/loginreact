@@ -10,6 +10,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from 'prop-types';
+import "../config";
 
 
 const styles = theme => ({
@@ -67,17 +68,18 @@ class Signin extends Component {
 	}
 
 	onSubmit(e) {
-		console.log(this.state);
 		e.preventDefault();
 		let {email, password} = this.state;
-		if(email !== "jedidiah.j@2adpro.com") {
+		if(email !== global.username) {
 			alert("Wrong Email Id");
 			return false;
 		} else {
-			if(password !== "welcome@123") {
+			if(password !== global.password) {
 				alert("Wrong Password");
 				return false;
 			} else {
+				sessionStorage.setItem("auth", true);
+				sessionStorage.setItem("email", email);
 				this.props.onLogin(true);
 			}
 		}
